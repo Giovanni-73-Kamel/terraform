@@ -4,7 +4,7 @@ resource "aws_key_pair" "my_key" {
 }
 
 resource "aws_instance" "web_server" {
-    ami           = "ami-053b0d53c279acc90" 
+    ami           = var.image_id
     instance_type = "t2.micro" 
     subnet_id = aws_subnet.public.id
     key_name = aws_key_pair.my_key.key_name
@@ -23,7 +23,8 @@ resource "aws_instance" "web_server" {
 
 terraform {
   backend "s3" {
-    bucket         = "gio73bucket"
+    bucket         = "gio73bucket" 
+    instance_type = "t2.micro" 
     key            = "env/dev/terraform.tfstate"
     region         = "us-east-1"
   }
