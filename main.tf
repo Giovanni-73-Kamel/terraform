@@ -19,3 +19,14 @@ resource "aws_instance" "web_server" {
 
     vpc_security_group_ids = [aws_security_group.web_sg.id]
 }
+
+
+terraform {
+  backend "s3" {
+    bucket         = "gio73bucket"
+    key            = "env/dev/terraform.tfstate"
+    region         = "us-east-1"
+  }
+}
+
+
